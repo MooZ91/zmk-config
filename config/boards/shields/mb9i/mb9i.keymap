@@ -3,65 +3,14 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    macros {
-        modbox_macro: modbox_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp M &kp O &kp D &kp B &kp O &kp X &kp ENTER>;
-        };
-
-        copy_macro: copy_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(C)>;
-        };
-
-        paste_macro: paste_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(V)>;
-        };
-
-        undo_macro: undo_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(Z)>;
-        };
-
-        redo_macro: redo_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(Y)>;
-        };
-
-        cmd_plus_macro: cmd_plus_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(KP_PLUS)>;
-        };
-
-        cmd_minus_macro: cmd_minus_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(KP_MINUS)>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
                 &kp C_VOL_DN &kp C_VOL_UP &mo 1
-                &paste_macro &cmd_plus_macro &cmd_minus_macro
-                &modbox_macro &undo_macro &redo_macro
+                &paste_win &cmd_plus_macos &cmd_minus_macos
+                &modbox_macro &undo_win &redo_win
             >;
         };
 
@@ -78,11 +27,411 @@
         };
 
         extra2 {
-            status = "reserved";    
+            status = "reserved";
         };
 
         extra3 {
-            status = "reserved";    
+            status = "reserved";
+        };
+    };
+
+    macros {
+        modbox_macro: modbox_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp M &kp O &kp D &kp B &kp O &kp X &kp ENTER>;
+        };
+
+        copy_win: copy_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(C)>;
+        };
+
+        paste_win: paste_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(V)>;
+        };
+
+        undo_win: undo_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(Z)>;
+        };
+
+        redo_win: redo_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(Y)>;
+        };
+
+        cmd_plus_macos: cmd_plus_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(KP_PLUS)>;
+        };
+
+        cmd_minus_macos: cmd_minus_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(KP_MINUS)>;
+        };
+
+        cut_win: cut_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(X)>;
+        };
+
+        select_all_win: select_all_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(A)>;
+        };
+
+        save_win: save_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(S)>;
+        };
+
+        save_as_win: save_as_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(LS(S))>;
+        };
+
+        new_win: new_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(N)>;
+        };
+
+        open_win: open_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(O)>;
+        };
+
+        find_win: find_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(F)>;
+        };
+
+        find_next_win: find_next_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(G)>;
+        };
+
+        replace_win: replace_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(H)>;
+        };
+
+        print_win: print_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(P)>;
+        };
+
+        bold_win: bold_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(B)>;
+        };
+
+        italic_win: italic_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(I)>;
+        };
+
+        underline_win: underline_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(U)>;
+        };
+
+        new_tab_win: new_tab_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(T)>;
+        };
+
+        close_tab_win: close_tab_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(W)>;
+        };
+
+        reopen_tab_win: reopen_tab_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(LS(T))>;
+        };
+
+        refresh_win: refresh_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(R)>;
+        };
+
+        duplicate_win: duplicate_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(D)>;
+        };
+
+        outdent_macro: outdent_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LS(TAB)>;
+        };
+
+        comment_win: comment_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(FSLH)>;
+        };
+
+        quit_app_macos: quit_app_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(Q)>;
+        };
+
+        switch_app_macos: switch_app_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(TAB)>;
+        };
+
+        spotlight_macos: spotlight_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(SPACE)>;
+        };
+
+        screenshot_macos: screenshot_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LS(N4))>;
+        };
+
+        lock_screen_macos: lock_screen_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LC(Q))>;
+        };
+
+        minimize_window_macos: minimize_window_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(M)>;
+        };
+
+        hide_app_macos: hide_app_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(H)>;
+        };
+
+        new_window_macos: new_window_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(N)>;
+        };
+
+        force_quit_macos: force_quit_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LA(ESC))>;
+        };
+
+        zoom_reset_macos: zoom_reset_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(N0)>;
+        };
+
+        /* --- VS Code shortcuts --- */
+
+        // Command Palette
+        command_palette_win: command_palette_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(LS(P))>;
+        };
+
+        command_palette_macos: command_palette_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LS(P))>;
+        };
+
+        // Quick Open (Go to File)
+        quick_open_win: quick_open_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(P)>;
+        };
+
+        quick_open_macos: quick_open_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(P)>;
+        };
+
+        // Toggle Integrated Terminal (same combo on both platforms)
+        toggle_terminal_macro: toggle_terminal_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(GRAVE)>;
+        };
+
+        // Toggle Sidebar
+        toggle_sidebar_win: toggle_sidebar_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(B)>;
+        };
+
+        toggle_sidebar_macos: toggle_sidebar_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(B)>;
+        };
+
+        // Format Document (same combo on both platforms)
+        format_document_macro: format_document_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LS(LA(F))>;
+        };
+
+        // Go to Definition (same key on both platforms)
+        go_to_definition_macro: go_to_definition_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp F12>;
+        };
+
+        // Rename Symbol (same key on both platforms)
+        rename_symbol_macro: rename_symbol_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp F2>;
+        };
+
+        // Quick Fix
+        quick_fix_win: quick_fix_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(DOT)>;
+        };
+
+        quick_fix_macos: quick_fix_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(DOT)>;
+        };
+
+        // Split Editor
+        split_editor_win: split_editor_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(BSLH)>;
+        };
+
+        split_editor_macos: split_editor_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(BSLH)>;
+        };
+
+        // Add Cursor Below (multi-cursor)
+        multi_cursor_down_win: multi_cursor_down_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(LA(DOWN))>;
+        };
+
+        multi_cursor_down_macos: multi_cursor_down_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LA(DOWN))>;
+        };
+
+        // Toggle Zen Mode (chord: primary modifier+K, then Z)
+        zen_mode_win: zen_mode_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(K) &kp Z>;
+        };
+
+        zen_mode_macos: zen_mode_macos {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(K) &kp Z>;
         };
     };
 };
