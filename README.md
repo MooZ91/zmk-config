@@ -1,55 +1,55 @@
-# MB9i ZMK Configuration
+# Configuración ZMK para MB9i
 
-This repository contains the ZMK firmware configuration for the **MB9i**, a compact 3x3 numeric keypad.
+Este repositorio contiene la configuración de firmware ZMK para el **MB9i**, un teclado numérico compacto de 3x3.
 
-## 🛠 Features
+## 🛠 Características
 
-- **3x3 Matrix**: Compact layout optimized for numeric input.
-- **ZMK Studio Support**: Integrated support for [ZMK Studio](https://zmk.dev/docs/studio), allowing for real-time keymap adjustments without reflashing.
-- **Bluetooth Connectivity**: Built for the `nice_nano_v2` controller.
-- **Multi-Layer Support**:
-  - **Default Layer**: Standard numeric keypad layout.
-  - **BT Layer**: Bluetooth profile management and system controls (Bootloader, Studio unlock).
+- **Matriz 3x3**: Diseño compacto optimizado para entrada numérica.
+- **Soporte para ZMK Studio**: Integración con [ZMK Studio](https://zmk.dev/docs/studio), que permite ajustar el keymap en tiempo real sin necesidad de reflashear.
+- **Conectividad Bluetooth**: Compilado para el controlador `nice_nano_v2`.
+- **Soporte multi-capa**:
+  - **Capa por defecto**: Distribución estándar de teclado numérico.
+  - **Capa BT**: Gestión de perfiles Bluetooth y controles del sistema (Bootloader, desbloqueo de Studio).
 
-## 🚀 Hardware Specifications
+## 🚀 Especificaciones de hardware
 
-- **Controller**: `nice_nano_v2`
-- **Layout**: 3x3 Matrix (9 keys)
-- **Diode Direction**: Column-to-Row
+- **Controlador**: `nice_nano_v2`
+- **Distribución**: Matriz 3x3 (9 teclas)
+- **Dirección de diodos**: Columna a fila
 
-## ⌨️ Keymap Overview
+## ⌨️ Resumen del keymap
 
-### Default Layer
-A standard numeric keypad setup for efficient data entry.
+### Capa por defecto
+Una configuración estándar de teclado numérico para una entrada de datos eficiente.
 
-### Bluetooth & System Layer
-Used for managing wireless connections and accessing firmware utilities:
-- Bluetooth profile selection and clearing.
-- Bootloader access.
-- ZMK Studio unlock.
+### Capa de Bluetooth y sistema
+Se usa para gestionar las conexiones inalámbricas y acceder a utilidades del firmware:
+- Selección y borrado de perfiles Bluetooth.
+- Acceso al bootloader.
+- Desbloqueo de ZMK Studio.
 
-## 📦 Build and Installation
+## 📦 Compilación e instalación
 
-This project is configured to build via GitHub Actions. You can either use the default configuration or customize it for your own needs.
+Este proyecto está configurado para compilarse mediante GitHub Actions. Puedes usar la configuración por defecto o personalizarla según tus necesidades.
 
-### Option 1: Use Default Firmware
-If you don't need custom keymaps, you can download the pre-built firmware directly from this repository:
-1. Go to the **Actions** tab at the top of this repository.
-2. Select the latest successful workflow run (usually named "Build").
-3. Scroll down to the **Artifacts** section.
-4. Download the `firmware` artifact, extract the `.uf2` file, and flash it to your `nice_nano_v2`.
+### Opción 1: Usar el firmware por defecto
+Si no necesitas un keymap personalizado, puedes descargar el firmware ya compilado directamente desde este repositorio:
+1. Ve a la pestaña **Actions** en la parte superior de este repositorio.
+2. Selecciona la ejecución exitosa más reciente (normalmente llamada "Build").
+3. Baja hasta la sección **Artifacts**.
+4. Descarga el artefacto `firmware`, extrae el archivo `.uf2` y flashéalo a tu `nice_nano_v2`.
 
-### Option 2: Customize and Build Your Own
-If you want to change the keymap or settings:
-1. Fork this repository to your own GitHub account.
-2. Customize your `mb9i.keymap` file.
-3. Commit and push your changes to trigger a new build.
-4. Download your custom `.uf2` firmware from the **Actions** tab of *your* forked repository:
-    - Select the latest successful workflow run.
-    - Scroll down to the **Artifacts** section.
-    - Download the `firmware` artifact and extract the `.uf2` file.
-5. Flash the firmware to your `nice_nano_v2` controller.
+### Opción 2: Personalizar y compilar tu propia versión
+Si quieres cambiar el keymap o la configuración:
+1. Haz un fork de este repositorio a tu propia cuenta de GitHub.
+2. Personaliza tu archivo `mb9i.keymap`.
+3. Haz commit y push de tus cambios para disparar una nueva compilación.
+4. Descarga tu firmware `.uf2` personalizado desde la pestaña **Actions** de *tu* repositorio forkeado:
+    - Selecciona la ejecución exitosa más reciente.
+    - Baja hasta la sección **Artifacts**.
+    - Descarga el artefacto `firmware` y extrae el archivo `.uf2`.
+5. Flashea el firmware a tu controlador `nice_nano_v2`.
 
-## 📄 License
+## 📄 Licencia
 
-This project is licensed under the MIT License.
+Este proyecto está licenciado bajo la Licencia MIT.
