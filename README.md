@@ -17,6 +17,40 @@ Este repositorio contiene la configuración de firmware ZMK para el **MB9i**, un
 - **Distribución**: Matriz 3x3 (9 teclas)
 - **Dirección de diodos**: Columna a fila
 
+## 🔌 Asignación de pines
+
+La matriz de teclado usa `diode-direction = col2row` (los diodos van de columna a fila) y se conecta al `nice_nano_v2` de la siguiente manera:
+
+### Filas
+
+| Fila | Pin GPIO |
+|------|----------|
+| Fila 0 | P0.10 |
+| Fila 1 | P1.11 |
+| Fila 2 | P0.09 |
+
+### Columnas
+
+| Columna | Pin GPIO |
+|---------|----------|
+| Columna 0 | P0.29 |
+| Columna 1 | P0.11 |
+| Columna 2 | P1.04 |
+
+### Mapeo de teclas físicas
+
+| Tecla | Posición (fila, columna) |
+|-------|---------------------------|
+| 1 | (0, 0) |
+| 2 | (0, 1) |
+| 3 | (0, 2) |
+| 4 | (1, 0) |
+| 5 | (1, 1) |
+| 6 | (1, 2) |
+| 7 | (2, 0) |
+| 8 | (2, 1) |
+| 9 | (2, 2) |
+
 ## ⌨️ Resumen del keymap
 
 ### Capa por defecto
