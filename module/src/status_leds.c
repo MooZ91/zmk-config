@@ -91,6 +91,10 @@ static bool flash_active(void) { return flash_step < FLASH_STEPS; }
 /* Pasos 0 y 2 encendidos, paso 1 apagado: eso da los dos destellos. */
 static bool flash_lit(void) { return flash_step == 0 || flash_step == 2; }
 
+static void flash_tick(struct k_work *work);
+
+static K_WORK_DELAYABLE_DEFINE(flash_work, flash_tick);
+
 static void flash_tick(struct k_work *work) {
     flash_step++;
     leds_update();
@@ -101,8 +105,6 @@ static void flash_tick(struct k_work *work) {
         k_work_reschedule(&flash_work, K_MSEC(CONFIG_MB9I_STATUS_LEDS_FLASH_MS));
     }
 }
-
-static K_WORK_DELAYABLE_DEFINE(flash_work, flash_tick);
 
 void mb9i_status_leds_flash(void) {
     flash_step = 0;
