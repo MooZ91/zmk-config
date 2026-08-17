@@ -2,5 +2,5 @@ name: mb9i-status-leds
 build:
   cmake: .
   kconfig: Kconfig
-settings:
-  dts_root: .
+  settings:
+    dts_root: .
