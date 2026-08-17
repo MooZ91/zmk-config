@@ -51,6 +51,14 @@
             ;
     };
 
+    behaviors {
+        // Confirmación visual de macro; ver module/src/behavior_status_flash.c
+        flash: behavior_status_flash {
+            compatible = "mb9i,behavior-status-flash";
+            #binding-cells = <0>;
+        };
+    };
+
     chosen {
         zmk,kscan = &default_kscan;
         zmk,physical-layout = &physical_layout0;

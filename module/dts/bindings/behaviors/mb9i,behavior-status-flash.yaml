@@ -1,0 +1,5 @@
+description: Status LED flash behavior
+
+compatible: "mb9i,behavior-status-flash"
+
+include: zero_param.yaml

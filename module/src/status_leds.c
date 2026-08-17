@@ -35,6 +35,8 @@
 #include <zmk/usb.h>
 #endif
 
+#include <mb9i_status_leds.h>
+
 #if IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW)
 #error "MB9I_STATUS_LEDS requiere ZMK_RGB_UNDERGLOW=n: el underglow reescribe todos los pixeles"
 #endif
@@ -59,6 +61,7 @@ static const struct device *const strip = DEVICE_DT_GET(STRIP_NODE);
 #define COLOR_BLUE RGB(0, 0, 255)
 #define COLOR_MAGENTA RGB(255, 0, 255)
 #define COLOR_WHITE RGB(255, 255, 255)
+#define COLOR_CYAN RGB(0, 255, 255)
 
 static struct led_rgb pixels[STRIP_LEN];
 
@@ -73,6 +76,22 @@ static void blink_tick(struct k_work *work) {
 }
 
 static K_WORK_DELAYABLE_DEFINE(blink_work, blink_tick);
+
+/* Destello de confirmación: mientras está activo tapa el estado normal. */
+static bool flashing;
+
+static void flash_end(struct k_work *work) {
+    flashing = false;
+    leds_update();
+}
+
+static K_WORK_DELAYABLE_DEFINE(flash_work, flash_end);
+
+void mb9i_status_leds_flash(void) {
+    flashing = true;
+    leds_update();
+    k_work_reschedule(&flash_work, K_MSEC(CONFIG_MB9I_STATUS_LEDS_FLASH_MS));
+}
 
 static void first_update(struct k_work *work) { leds_update(); }
 
@@ -122,8 +141,11 @@ static void leds_update(void) {
     bool blink_battery = false;
     bool blink_connection = false;
 
-    /* Fuera del estado activo apagamos todo para no drenar la batería. */
-    if (zmk_activity_get_state() == ZMK_ACTIVITY_ACTIVE) {
+    if (flashing) {
+        battery = COLOR_CYAN;
+        connection = COLOR_CYAN;
+    } else if (zmk_activity_get_state() == ZMK_ACTIVITY_ACTIVE) {
+        /* Fuera del estado activo apagamos todo para no drenar la batería. */
         battery = battery_color(&blink_battery);
         connection = connection_color(&blink_connection);
     }

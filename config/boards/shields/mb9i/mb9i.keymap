@@ -40,259 +40,259 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp M &kp O &kp D &kp B &kp O &kp X &kp ENTER>;
+                = <&macro_tap &kp M &kp O &kp D &kp B &kp O &kp X &kp ENTER &flash>;
         };
 
         macro_copy_win: macro_copy_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(C)>;
+                = <&macro_tap &kp LC(C) &flash>;
         };
 
         macro_paste_win: macro_paste_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(V)>;
+                = <&macro_tap &kp LC(V) &flash>;
         };
 
         macro_undo_win: macro_undo_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(Z)>;
+                = <&macro_tap &kp LC(Z) &flash>;
         };
 
         macro_redo_win: macro_redo_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(Y)>;
+                = <&macro_tap &kp LC(Y) &flash>;
         };
 
         macro_cmd_plus_macos: macro_cmd_plus_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(KP_PLUS)>;
+                = <&macro_tap &kp LG(KP_PLUS) &flash>;
         };
 
         macro_cmd_minus_macos: macro_cmd_minus_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(KP_MINUS)>;
+                = <&macro_tap &kp LG(KP_MINUS) &flash>;
         };
 
         macro_cut_win: macro_cut_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(X)>;
+                = <&macro_tap &kp LC(X) &flash>;
         };
 
         macro_select_all_win: macro_select_all_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(A)>;
+                = <&macro_tap &kp LC(A) &flash>;
         };
 
         macro_save_win: macro_save_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(S)>;
+                = <&macro_tap &kp LC(S) &flash>;
         };
 
         macro_save_as_win: macro_save_as_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(LS(S))>;
+                = <&macro_tap &kp LC(LS(S)) &flash>;
         };
 
         macro_new_win: macro_new_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(N)>;
+                = <&macro_tap &kp LC(N) &flash>;
         };
 
         macro_open_win: macro_open_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(O)>;
+                = <&macro_tap &kp LC(O) &flash>;
         };
 
         macro_find_win: macro_find_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(F)>;
+                = <&macro_tap &kp LC(F) &flash>;
         };
 
         macro_find_next_win: macro_find_next_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(G)>;
+                = <&macro_tap &kp LC(G) &flash>;
         };
 
         macro_replace_win: macro_replace_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(H)>;
+                = <&macro_tap &kp LC(H) &flash>;
         };
 
         macro_print_win: macro_print_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(P)>;
+                = <&macro_tap &kp LC(P) &flash>;
         };
 
         macro_bold_win: macro_bold_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(B)>;
+                = <&macro_tap &kp LC(B) &flash>;
         };
 
         macro_italic_win: macro_italic_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(I)>;
+                = <&macro_tap &kp LC(I) &flash>;
         };
 
         macro_underline_win: macro_underline_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(U)>;
+                = <&macro_tap &kp LC(U) &flash>;
         };
 
         macro_new_tab_win: macro_new_tab_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(T)>;
+                = <&macro_tap &kp LC(T) &flash>;
         };
 
         macro_close_tab_win: macro_close_tab_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(W)>;
+                = <&macro_tap &kp LC(W) &flash>;
         };
 
         macro_reopen_tab_win: macro_reopen_tab_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(LS(T))>;
+                = <&macro_tap &kp LC(LS(T)) &flash>;
         };
 
         macro_refresh_win: macro_refresh_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(R)>;
+                = <&macro_tap &kp LC(R) &flash>;
         };
 
         macro_duplicate_win: macro_duplicate_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(D)>;
+                = <&macro_tap &kp LC(D) &flash>;
         };
 
         macro_outdent: macro_outdent {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LS(TAB)>;
+                = <&macro_tap &kp LS(TAB) &flash>;
         };
 
         macro_comment_win: macro_comment_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(FSLH)>;
+                = <&macro_tap &kp LC(FSLH) &flash>;
         };
 
         macro_quit_app_macos: macro_quit_app_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(Q)>;
+                = <&macro_tap &kp LG(Q) &flash>;
         };
 
         macro_switch_app_macos: macro_switch_app_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(TAB)>;
+                = <&macro_tap &kp LG(TAB) &flash>;
         };
 
         macro_spotlight_macos: macro_spotlight_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(SPACE)>;
+                = <&macro_tap &kp LG(SPACE) &flash>;
         };
 
         macro_screenshot_macos: macro_screenshot_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(LS(N4))>;
+                = <&macro_tap &kp LG(LS(N4)) &flash>;
         };
 
         macro_lock_screen_macos: macro_lock_screen_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(LC(Q))>;
+                = <&macro_tap &kp LG(LC(Q)) &flash>;
         };
 
         macro_minimize_window_macos: macro_minimize_window_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(M)>;
+                = <&macro_tap &kp LG(M) &flash>;
         };
 
         macro_hide_app_macos: macro_hide_app_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(H)>;
+                = <&macro_tap &kp LG(H) &flash>;
         };
 
         macro_new_window_macos: macro_new_window_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(N)>;
+                = <&macro_tap &kp LG(N) &flash>;
         };
 
         macro_force_quit_macos: macro_force_quit_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(LA(ESC))>;
+                = <&macro_tap &kp LG(LA(ESC)) &flash>;
         };
 
         macro_zoom_reset_macos: macro_zoom_reset_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(N0)>;
+                = <&macro_tap &kp LG(N0) &flash>;
         };
 
         /* --- VS Code shortcuts --- */
@@ -302,14 +302,14 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(LS(P))>;
+                = <&macro_tap &kp LC(LS(P)) &flash>;
         };
 
         macro_command_palette_macos: macro_command_palette_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(LS(P))>;
+                = <&macro_tap &kp LG(LS(P)) &flash>;
         };
 
         // Quick Open (Go to File)
@@ -317,14 +317,14 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(P)>;
+                = <&macro_tap &kp LC(P) &flash>;
         };
 
         macro_quick_open_macos: macro_quick_open_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(P)>;
+                = <&macro_tap &kp LG(P) &flash>;
         };
 
         // Toggle Integrated Terminal (same combo on both platforms)
@@ -332,7 +332,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(GRAVE)>;
+                = <&macro_tap &kp LC(GRAVE) &flash>;
         };
 
         // Toggle Sidebar
@@ -340,14 +340,14 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(B)>;
+                = <&macro_tap &kp LC(B) &flash>;
         };
 
         macro_toggle_sidebar_macos: macro_toggle_sidebar_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(B)>;
+                = <&macro_tap &kp LG(B) &flash>;
         };
 
         // Format Document (same combo on both platforms)
@@ -355,7 +355,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LS(LA(F))>;
+                = <&macro_tap &kp LS(LA(F)) &flash>;
         };
 
         // Go to Definition (same key on both platforms)
@@ -363,7 +363,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp F12>;
+                = <&macro_tap &kp F12 &flash>;
         };
 
         // Rename Symbol (same key on both platforms)
@@ -371,7 +371,7 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp F2>;
+                = <&macro_tap &kp F2 &flash>;
         };
 
         // Quick Fix
@@ -379,14 +379,14 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(DOT)>;
+                = <&macro_tap &kp LC(DOT) &flash>;
         };
 
         macro_quick_fix_macos: macro_quick_fix_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(DOT)>;
+                = <&macro_tap &kp LG(DOT) &flash>;
         };
 
         // Split Editor
@@ -394,14 +394,14 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(BSLH)>;
+                = <&macro_tap &kp LC(BSLH) &flash>;
         };
 
         macro_split_editor_macos: macro_split_editor_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(BSLH)>;
+                = <&macro_tap &kp LG(BSLH) &flash>;
         };
 
         // Add Cursor Below (multi-cursor)
@@ -409,14 +409,14 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(LA(DOWN))>;
+                = <&macro_tap &kp LC(LA(DOWN)) &flash>;
         };
 
         macro_multi_cursor_down_macos: macro_multi_cursor_down_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(LA(DOWN))>;
+                = <&macro_tap &kp LG(LA(DOWN)) &flash>;
         };
 
         // Toggle Zen Mode (chord: primary modifier+K, then Z)
@@ -424,14 +424,14 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LC(K) &kp Z>;
+                = <&macro_tap &kp LC(K) &kp Z &flash>;
         };
 
         macro_zen_mode_macos: macro_zen_mode_macos {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp LG(K) &kp Z>;
+                = <&macro_tap &kp LG(K) &kp Z &flash>;
         };
     };
 };

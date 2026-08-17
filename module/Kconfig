@@ -37,4 +37,9 @@ config MB9I_STATUS_LEDS_BLINK_MS
     range 100 10000
     default 1000
 
+config MB9I_STATUS_LEDS_FLASH_MS
+    int "Duration in milliseconds of the confirmation flash"
+    range 20 2000
+    default 120
+
 endif # MB9I_STATUS_LEDS
