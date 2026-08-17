@@ -77,18 +77,35 @@ static void blink_tick(struct k_work *work) {
 
 static K_WORK_DELAYABLE_DEFINE(blink_work, blink_tick);
 
-/* Destello de confirmación: mientras está activo tapa el estado normal. */
-static bool flashing;
+/*
+ * Destello doble de confirmación: encendido, hueco oscuro, encendido.
+ * Mientras la secuencia corre tapa el estado normal; al llegar al último paso
+ * se vuelve a mostrar batería y conexión.
+ */
+#define FLASH_STEPS 3
 
-static void flash_end(struct k_work *work) {
-    flashing = false;
+static uint8_t flash_step = FLASH_STEPS;
+
+static bool flash_active(void) { return flash_step < FLASH_STEPS; }
+
+/* Pasos 0 y 2 encendidos, paso 1 apagado: eso da los dos destellos. */
+static bool flash_lit(void) { return flash_step == 0 || flash_step == 2; }
+
+static void flash_tick(struct k_work *work) {
+    flash_step++;
     leds_update();
+
+    /* Hace falta un tick más para cerrar el último destello y devolver
+     * los LEDs al estado de batería y conexión. */
+    if (flash_active()) {
+        k_work_reschedule(&flash_work, K_MSEC(CONFIG_MB9I_STATUS_LEDS_FLASH_MS));
+    }
 }
 
-static K_WORK_DELAYABLE_DEFINE(flash_work, flash_end);
+static K_WORK_DELAYABLE_DEFINE(flash_work, flash_tick);
 
 void mb9i_status_leds_flash(void) {
-    flashing = true;
+    flash_step = 0;
     leds_update();
     k_work_reschedule(&flash_work, K_MSEC(CONFIG_MB9I_STATUS_LEDS_FLASH_MS));
 }
@@ -141,9 +158,12 @@ static void leds_update(void) {
     bool blink_battery = false;
     bool blink_connection = false;
 
-    if (flashing) {
-        battery = COLOR_CYAN;
-        connection = COLOR_CYAN;
+    if (flash_active()) {
+        /* En el hueco entre los dos destellos quedan apagados. */
+        if (flash_lit()) {
+            battery = COLOR_CYAN;
+            connection = COLOR_CYAN;
+        }
     } else if (zmk_activity_get_state() == ZMK_ACTIVITY_ACTIVE) {
         /* Fuera del estado activo apagamos todo para no drenar la batería. */
         battery = battery_color(&blink_battery);
