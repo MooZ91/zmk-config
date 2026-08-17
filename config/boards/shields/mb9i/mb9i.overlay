@@ -53,7 +53,7 @@
     // Cadena de 2 LEDs ARGB (WS2812/SK6812) de prueba en P0.17
     led_strip: ws2812 {
         compatible = "worldsemi,ws2812-gpio";
-        gpios = <&gpio0 17 GPIO_ACTIVE_HIGH>;
+        in-gpios = <&gpio0 17 GPIO_ACTIVE_HIGH>;
         chain-length = <2>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
     };
