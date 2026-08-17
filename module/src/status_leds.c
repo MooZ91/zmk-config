@@ -62,7 +62,6 @@ static const struct device *const strip = DEVICE_DT_GET(STRIP_NODE);
 #define COLOR_BLUE RGB(0, 0, 255)
 #define COLOR_MAGENTA RGB(255, 0, 255)
 #define COLOR_WHITE RGB(255, 255, 255)
-#define COLOR_CYAN RGB(0, 255, 255)
 
 static struct led_rgb pixels[STRIP_LEN];
 
@@ -80,8 +79,8 @@ static K_WORK_DELAYABLE_DEFINE(blink_work, blink_tick);
 
 /*
  * Destello doble de confirmación: encendido, hueco oscuro, encendido.
- * Mientras la secuencia corre tapa el estado normal; al llegar al último paso
- * se vuelve a mostrar batería y conexión.
+ * Solo toma el LED de conexión; al llegar al último paso ese LED vuelve a
+ * mostrar el endpoint activo.
  */
 #define FLASH_STEPS 3
 
@@ -161,16 +160,20 @@ static void leds_update(void) {
     bool blink_battery = false;
     bool blink_connection = false;
 
-    if (flash_active()) {
-        /* En el hueco entre los dos destellos quedan apagados. */
-        if (flash_lit()) {
-            battery = COLOR_CYAN;
-            connection = COLOR_CYAN;
-        }
-    } else if (zmk_activity_get_state() == ZMK_ACTIVITY_ACTIVE) {
-        /* Fuera del estado activo apagamos todo para no drenar la batería. */
+    /* Fuera del estado activo apagamos todo para no drenar la batería. */
+    if (zmk_activity_get_state() == ZMK_ACTIVITY_ACTIVE) {
         battery = battery_color(&blink_battery);
         connection = connection_color(&blink_connection);
+    }
+
+    /*
+     * El destello se queda solo con el LED de conexión: así el de batería
+     * sigue legible mientras tecleás. En el hueco entre los dos destellos
+     * el LED queda apagado.
+     */
+    if (flash_active()) {
+        connection = flash_lit() ? COLOR_GREEN : COLOR_OFF;
+        blink_connection = false;
     }
 
     if (blink_battery && !blink_phase) {

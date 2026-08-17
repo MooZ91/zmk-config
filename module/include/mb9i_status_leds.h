@@ -5,9 +5,10 @@
 #pragma once
 
 /*
- * Dispara un destello doble en cian (destello, hueco oscuro, destello) como
- * confirmación visual; al terminar vuelve a mostrar batería y conexión.
- * Cada paso dura CONFIG_MB9I_STATUS_LEDS_FLASH_MS.
+ * Dispara un destello doble en verde (destello, hueco oscuro, destello) sobre
+ * el LED de conexión, como confirmación visual de "comando enviado"; al
+ * terminar ese LED vuelve a mostrar el endpoint activo. El LED de batería no
+ * se toca. Cada paso dura CONFIG_MB9I_STATUS_LEDS_FLASH_MS.
  * Llamarla de nuevo mientras la secuencia corre la reinicia desde cero.
  */
 void mb9i_status_leds_flash(void);
