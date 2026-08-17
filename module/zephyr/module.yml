@@ -1,0 +1,4 @@
+name: mb9i-status-leds
+build:
+  cmake: .
+  kconfig: Kconfig

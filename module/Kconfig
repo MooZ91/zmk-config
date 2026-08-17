@@ -1,0 +1,40 @@
+menuconfig MB9I_STATUS_LEDS
+    bool "MB9i status LEDs on the addressable strip"
+    depends on ZMK_BATTERY_REPORTING
+    select LED_STRIP
+    help
+      Drives the WS2812 chain pointed at by the zmk,underglow chosen node as
+      status indicators instead of underglow: the first LED shows the battery
+      level and the second one the active connection.
+
+      Requires CONFIG_ZMK_RGB_UNDERGLOW to be disabled, since the underglow
+      driver rewrites every pixel on each tick.
+
+if MB9I_STATUS_LEDS
+
+config MB9I_STATUS_LEDS_BRIGHTNESS
+    int "Status LED brightness in percent"
+    range 1 100
+    default 50
+
+config MB9I_STATUS_LEDS_BATT_HIGH
+    int "Battery percent above which the indicator is green"
+    range 0 100
+    default 50
+
+config MB9I_STATUS_LEDS_BATT_LOW
+    int "Battery percent above which the indicator is yellow"
+    range 0 MB9I_STATUS_LEDS_BATT_HIGH
+    default 20
+
+config MB9I_STATUS_LEDS_BATT_CRITICAL
+    int "Battery percent below which the indicator blinks red"
+    range 0 MB9I_STATUS_LEDS_BATT_LOW
+    default 10
+
+config MB9I_STATUS_LEDS_BLINK_MS
+    int "Blink period in milliseconds"
+    range 100 10000
+    default 1000
+
+endif # MB9I_STATUS_LEDS
