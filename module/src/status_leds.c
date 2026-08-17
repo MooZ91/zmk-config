@@ -62,6 +62,7 @@ static const struct device *const strip = DEVICE_DT_GET(STRIP_NODE);
 #define COLOR_BLUE RGB(0, 0, 255)
 #define COLOR_MAGENTA RGB(255, 0, 255)
 #define COLOR_WHITE RGB(255, 255, 255)
+#define COLOR_CYAN RGB(0, 255, 255)
 
 static struct led_rgb pixels[STRIP_LEN];
 
@@ -172,7 +173,7 @@ static void leds_update(void) {
      * el LED queda apagado.
      */
     if (flash_active()) {
-        connection = flash_lit() ? COLOR_GREEN : COLOR_OFF;
+        connection = flash_lit() ? COLOR_CYAN : COLOR_OFF;
         blink_connection = false;
     }
 
