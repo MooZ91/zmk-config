@@ -24,6 +24,7 @@
 #include <zmk/events/activity_state_changed.h>
 #include <zmk/events/battery_state_changed.h>
 #include <zmk/events/endpoint_changed.h>
+#include <zmk/events/position_state_changed.h>
 
 #if IS_ENABLED(CONFIG_ZMK_BLE)
 #include <zmk/ble.h>
@@ -197,11 +198,22 @@ static void leds_update(void) {
 }
 
 static int status_leds_listener(const zmk_event_t *eh) {
+    const struct zmk_position_state_changed *pos_ev = as_zmk_position_state_changed(eh);
+
+    if (pos_ev != NULL) {
+        /* Cualquier tecla confirma con el destello, solo al presionar. */
+        if (pos_ev->state) {
+            mb9i_status_leds_flash();
+        }
+        return ZMK_EV_EVENT_BUBBLE;
+    }
+
     leds_update();
     return ZMK_EV_EVENT_BUBBLE;
 }
 
 ZMK_LISTENER(mb9i_status_leds, status_leds_listener);
+ZMK_SUBSCRIPTION(mb9i_status_leds, zmk_position_state_changed);
 ZMK_SUBSCRIPTION(mb9i_status_leds, zmk_battery_state_changed);
 ZMK_SUBSCRIPTION(mb9i_status_leds, zmk_activity_state_changed);
 ZMK_SUBSCRIPTION(mb9i_status_leds, zmk_endpoint_changed);
