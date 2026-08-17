@@ -21,6 +21,7 @@
 #include <zmk/endpoints.h>
 #include <zmk/endpoints_types.h>
 #include <zmk/event_manager.h>
+#include <zmk/keymap.h>
 #include <zmk/events/activity_state_changed.h>
 #include <zmk/events/battery_state_changed.h>
 #include <zmk/events/endpoint_changed.h>
@@ -63,6 +64,9 @@ static const struct device *const strip = DEVICE_DT_GET(STRIP_NODE);
 #define COLOR_MAGENTA RGB(255, 0, 255)
 #define COLOR_WHITE RGB(255, 255, 255)
 #define COLOR_CYAN RGB(0, 255, 255)
+/* Violeta a mitad de camino entre el azul y el magenta, que ya usa el LED de
+ * conexión: suficiente rojo para no confundirse con el azul de BLE conectado. */
+#define COLOR_VIOLET RGB(160, 0, 255)
 
 static struct led_rgb pixels[STRIP_LEN];
 
@@ -85,7 +89,15 @@ static K_WORK_DELAYABLE_DEFINE(blink_work, blink_tick);
  */
 #define FLASH_STEPS 3
 
+/* La capa 1 (bt_layer) confirma en magenta en vez de cian, para que se note
+ * de un vistazo que estás fuera de la capa por defecto. */
+#define FLASH_ALT_LAYER 1
+
 static uint8_t flash_step = FLASH_STEPS;
+
+/* Se fija al arrancar la secuencia para que los dos destellos salgan del
+ * mismo color aunque sueltes la capa en el medio. */
+static struct led_rgb flash_color;
 
 static bool flash_active(void) { return flash_step < FLASH_STEPS; }
 
@@ -108,6 +120,8 @@ static void flash_tick(struct k_work *work) {
 }
 
 void mb9i_status_leds_flash(void) {
+    flash_color =
+        (zmk_keymap_highest_layer_active() == FLASH_ALT_LAYER) ? COLOR_VIOLET : COLOR_CYAN;
     flash_step = 0;
     leds_update();
     k_work_reschedule(&flash_work, K_MSEC(CONFIG_MB9I_STATUS_LEDS_FLASH_MS));
@@ -173,7 +187,7 @@ static void leds_update(void) {
      * el LED queda apagado.
      */
     if (flash_active()) {
-        connection = flash_lit() ? COLOR_CYAN : COLOR_OFF;
+        connection = flash_lit() ? flash_color : COLOR_OFF;
         blink_connection = false;
     }
 
