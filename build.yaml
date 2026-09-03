@@ -22,4 +22,4 @@ include:
   - board: nice_nano_v2
     shield: mb9i
     snippet: studio-rpc-usb-uart
-    cmake-args: '-DCONFIG_ZMK_STUDIO=y -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}/module"'
+    cmake-args: '-DCONFIG_ZMK_STUDIO=y -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}/module" -DDTS_EXTRA_CPPFLAGS=-DMB9I_OS_MACOS'

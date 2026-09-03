@@ -10,6 +10,7 @@ Este repositorio contiene la configuración de firmware ZMK para el **MB9i**, un
 - **Soporte multi-capa**:
   - **Capa por defecto**: Distribución estándar de teclado numérico.
   - **Capa BT**: Gestión de perfiles Bluetooth y controles del sistema (Bootloader, desbloqueo de Studio).
+- **Macros por plataforma**: Dos juegos de macros, uno para Windows y otro para macOS, seleccionables en tiempo de compilación.
 - **LEDs de estado**: Dos LEDs ARGB que indican el nivel de batería y la conexión activa.
 - **Confirmación visual**: Cada pulsación dispara un destello, con un color distinto según la capa activa.
 
@@ -76,6 +77,47 @@ Se usa para gestionar las conexiones inalámbricas y acceder a utilidades del fi
 - Selección y borrado de perfiles Bluetooth.
 - Acceso al bootloader.
 - Desbloqueo de ZMK Studio.
+
+## 🖥 Plataforma (Windows / macOS)
+
+Los atajos de Windows y de macOS viven en dos listas separadas dentro de `mb9i.keymap`, y **solo una se compila**. Las dos definen exactamente los mismos nombres de macro, así que las capas no cambian según la plataforma: `&macro_paste` resuelve a `Ctrl+V` o a `Cmd+V` según lo que hayas elegido.
+
+**Actualmente el firmware se compila para macOS.**
+
+### Cómo cambiar de plataforma
+
+La forma recomendada es desde `build.yaml`, sin tocar el keymap. El flag viaja al preprocesador del devicetree:
+
+```yaml
+cmake-args: '... -DDTS_EXTRA_CPPFLAGS=-DMB9I_OS_MACOS'
+```
+
+Para compilar la versión de Windows, cambia ese valor por `-DMB9I_OS_WIN`, o quita el flag por completo: si no se define ninguna plataforma, el keymap usa Windows por defecto.
+
+También puedes fijarla editando directamente la cabecera de `mb9i.keymap`, aunque conviene reservarlo para cuando quieras cambiar el valor por defecto del repositorio:
+
+```c
+#if !defined(MB9I_OS_WIN) && !defined(MB9I_OS_MACOS)
+#define MB9I_OS_WIN
+#endif
+```
+
+Definir las dos a la vez corta la compilación con un `#error`, para que no queden macros duplicadas en silencio.
+
+### Diferencias que no son solo el modificador
+
+La mayoría de los atajos solo cambian `Ctrl` por `Cmd`, pero algunos son distintos de verdad:
+
+| Acción | Windows | macOS |
+|--------|---------|-------|
+| Rehacer | `Ctrl+Y` | `Cmd+Shift+Z` |
+| Buscar y reemplazar | `Ctrl+H` | `Cmd+Opt+F` |
+| Cerrar aplicación | `Alt+F4` | `Cmd+Q` |
+| Cambiar de aplicación | `Alt+Tab` | `Cmd+Tab` |
+| Búsqueda del sistema | `Win+S` | `Cmd+Espacio` |
+| Captura de pantalla | `Win+Shift+S` | `Cmd+Shift+4` |
+| Bloquear pantalla | `Win+L` | `Cmd+Ctrl+Q` |
+| Forzar cierre | `Ctrl+Shift+Esc` | `Cmd+Opt+Esc` |
 
 ## 💡 LEDs de estado
 

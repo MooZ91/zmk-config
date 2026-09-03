@@ -2,6 +2,25 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
+/*
+ * Plataforma de destino
+ * ---------------------
+ * Solo se compila una de las dos listas de macros. Cambiá el valor por defecto
+ * acá abajo, o pasalo desde build.yaml sin tocar este archivo:
+ *
+ *     cmake-args: -DDTS_EXTRA_CPPFLAGS=-DMB9I_OS_MACOS
+ *
+ * Las dos listas definen los mismos nombres, así que las capas no cambian
+ * según la plataforma.
+ */
+#if !defined(MB9I_OS_WIN) && !defined(MB9I_OS_MACOS)
+#define MB9I_OS_WIN
+#endif
+
+#if defined(MB9I_OS_WIN) && defined(MB9I_OS_MACOS)
+#error "Definí una sola plataforma: MB9I_OS_WIN o MB9I_OS_MACOS"
+#endif
+
 / {
     keymap {
         compatible = "zmk,keymap";
@@ -9,8 +28,8 @@
         default_layer {
             bindings = <
                 &kp C_VOL_DN &kp C_VOL_UP &mo 1
-                &macro_paste_win &macro_cmd_plus_macos &macro_cmd_minus_macos
-                &macro_modbox &macro_undo_win &macro_redo_win
+                &macro_paste &macro_zoom_in &macro_zoom_out
+                &macro_modbox &macro_undo &macro_redo
             >;
         };
 
@@ -36,179 +55,14 @@
     };
 
     macros {
+
+        /* --- Comunes a ambas plataformas --- */
+
         macro_modbox: macro_modbox {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
                 = <&macro_tap &kp M &kp O &kp D &kp B &kp O &kp X &kp ENTER>;
-        };
-
-        macro_copy_win: macro_copy_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(C)>;
-        };
-
-        macro_paste_win: macro_paste_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(V)>;
-        };
-
-        macro_undo_win: macro_undo_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(Z)>;
-        };
-
-        macro_redo_win: macro_redo_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(Y)>;
-        };
-
-        macro_cmd_plus_macos: macro_cmd_plus_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(KP_PLUS)>;
-        };
-
-        macro_cmd_minus_macos: macro_cmd_minus_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(KP_MINUS)>;
-        };
-
-        macro_cut_win: macro_cut_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(X)>;
-        };
-
-        macro_select_all_win: macro_select_all_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(A)>;
-        };
-
-        macro_save_win: macro_save_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(S)>;
-        };
-
-        macro_save_as_win: macro_save_as_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(LS(S))>;
-        };
-
-        macro_new_win: macro_new_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(N)>;
-        };
-
-        macro_open_win: macro_open_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(O)>;
-        };
-
-        macro_find_win: macro_find_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(F)>;
-        };
-
-        macro_find_next_win: macro_find_next_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(G)>;
-        };
-
-        macro_replace_win: macro_replace_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(H)>;
-        };
-
-        macro_print_win: macro_print_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(P)>;
-        };
-
-        macro_bold_win: macro_bold_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(B)>;
-        };
-
-        macro_italic_win: macro_italic_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(I)>;
-        };
-
-        macro_underline_win: macro_underline_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(U)>;
-        };
-
-        macro_new_tab_win: macro_new_tab_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(T)>;
-        };
-
-        macro_close_tab_win: macro_close_tab_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(W)>;
-        };
-
-        macro_reopen_tab_win: macro_reopen_tab_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(LS(T))>;
-        };
-
-        macro_refresh_win: macro_refresh_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(R)>;
-        };
-
-        macro_duplicate_win: macro_duplicate_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(D)>;
         };
 
         macro_outdent: macro_outdent {
@@ -218,116 +72,7 @@
                 = <&macro_tap &kp LS(TAB)>;
         };
 
-        macro_comment_win: macro_comment_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(FSLH)>;
-        };
-
-        macro_quit_app_macos: macro_quit_app_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(Q)>;
-        };
-
-        macro_switch_app_macos: macro_switch_app_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(TAB)>;
-        };
-
-        macro_spotlight_macos: macro_spotlight_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(SPACE)>;
-        };
-
-        macro_screenshot_macos: macro_screenshot_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(LS(N4))>;
-        };
-
-        macro_lock_screen_macos: macro_lock_screen_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(LC(Q))>;
-        };
-
-        macro_minimize_window_macos: macro_minimize_window_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(M)>;
-        };
-
-        macro_hide_app_macos: macro_hide_app_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(H)>;
-        };
-
-        macro_new_window_macos: macro_new_window_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(N)>;
-        };
-
-        macro_force_quit_macos: macro_force_quit_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(LA(ESC))>;
-        };
-
-        macro_zoom_reset_macos: macro_zoom_reset_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(N0)>;
-        };
-
-        /* --- VS Code shortcuts --- */
-
-        // Command Palette
-        macro_command_palette_win: macro_command_palette_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(LS(P))>;
-        };
-
-        macro_command_palette_macos: macro_command_palette_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(LS(P))>;
-        };
-
-        // Quick Open (Go to File)
-        macro_quick_open_win: macro_quick_open_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(P)>;
-        };
-
-        macro_quick_open_macos: macro_quick_open_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(P)>;
-        };
-
-        // Toggle Integrated Terminal (same combo on both platforms)
+        // Toggle Integrated Terminal (mismo atajo en las dos plataformas)
         macro_toggle_terminal: macro_toggle_terminal {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -335,22 +80,7 @@
                 = <&macro_tap &kp LC(GRAVE)>;
         };
 
-        // Toggle Sidebar
-        macro_toggle_sidebar_win: macro_toggle_sidebar_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(B)>;
-        };
-
-        macro_toggle_sidebar_macos: macro_toggle_sidebar_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(B)>;
-        };
-
-        // Format Document (same combo on both platforms)
+        // Format Document (mismo atajo en las dos plataformas)
         macro_format_document: macro_format_document {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -358,7 +88,7 @@
                 = <&macro_tap &kp LS(LA(F))>;
         };
 
-        // Go to Definition (same key on both platforms)
+        // Go to Definition (misma tecla en las dos plataformas)
         macro_go_to_definition: macro_go_to_definition {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -366,7 +96,7 @@
                 = <&macro_tap &kp F12>;
         };
 
-        // Rename Symbol (same key on both platforms)
+        // Rename Symbol (misma tecla en las dos plataformas)
         macro_rename_symbol: macro_rename_symbol {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -374,64 +104,641 @@
                 = <&macro_tap &kp F2>;
         };
 
-        // Quick Fix
-        macro_quick_fix_win: macro_quick_fix_win {
+#ifdef MB9I_OS_WIN
+
+        /* --- Edición (Windows) --- */
+
+        macro_copy: macro_copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(C)>;
+        };
+
+        macro_paste: macro_paste {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(V)>;
+        };
+
+        macro_cut: macro_cut {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(X)>;
+        };
+
+        macro_select_all: macro_select_all {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(A)>;
+        };
+
+        macro_undo: macro_undo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(Z)>;
+        };
+
+        macro_redo: macro_redo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(Y)>;
+        };
+
+        macro_duplicate: macro_duplicate {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(D)>;
+        };
+
+        macro_comment: macro_comment {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(FSLH)>;
+        };
+
+        /* --- Archivos (Windows) --- */
+
+        macro_save: macro_save {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(S)>;
+        };
+
+        macro_save_as: macro_save_as {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(LS(S))>;
+        };
+
+        macro_new: macro_new {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(N)>;
+        };
+
+        macro_open: macro_open {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(O)>;
+        };
+
+        macro_print: macro_print {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(P)>;
+        };
+
+        /* --- Búsqueda (Windows) --- */
+
+        macro_find: macro_find {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(F)>;
+        };
+
+        macro_find_next: macro_find_next {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(G)>;
+        };
+
+        macro_replace: macro_replace {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(H)>;
+        };
+
+        /* --- Formato de texto (Windows) --- */
+
+        macro_bold: macro_bold {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(B)>;
+        };
+
+        macro_italic: macro_italic {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(I)>;
+        };
+
+        macro_underline: macro_underline {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(U)>;
+        };
+
+        /* --- Pestañas y zoom (Windows) --- */
+
+        macro_new_tab: macro_new_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(T)>;
+        };
+
+        macro_close_tab: macro_close_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(W)>;
+        };
+
+        macro_reopen_tab: macro_reopen_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(LS(T))>;
+        };
+
+        macro_refresh: macro_refresh {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(R)>;
+        };
+
+        macro_zoom_in: macro_zoom_in {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(KP_PLUS)>;
+        };
+
+        macro_zoom_out: macro_zoom_out {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(KP_MINUS)>;
+        };
+
+        macro_zoom_reset: macro_zoom_reset {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(N0)>;
+        };
+
+        /* --- Sistema (Windows) --- */
+
+        // Alt+F4
+        macro_quit_app: macro_quit_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LA(F4)>;
+        };
+
+        // Alt+Tab
+        macro_switch_app: macro_switch_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LA(TAB)>;
+        };
+
+        // Win+S: búsqueda del sistema, equivalente a Spotlight
+        macro_search: macro_search {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(S)>;
+        };
+
+        // Win+Shift+S: recorte de pantalla
+        macro_screenshot: macro_screenshot {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LS(S))>;
+        };
+
+        // Win+L
+        macro_lock_screen: macro_lock_screen {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(L)>;
+        };
+
+        // Win+Flecha abajo
+        macro_minimize_window: macro_minimize_window {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(DOWN)>;
+        };
+
+        // Win+D: mostrar escritorio, equivalente a ocultar la app
+        macro_hide_app: macro_hide_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(D)>;
+        };
+
+        macro_new_window: macro_new_window {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(N)>;
+        };
+
+        // Ctrl+Shift+Esc: administrador de tareas
+        macro_force_quit: macro_force_quit {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(LS(ESC))>;
+        };
+
+        /* --- VS Code (Windows) --- */
+
+        macro_command_palette: macro_command_palette {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(LS(P))>;
+        };
+
+        macro_quick_open: macro_quick_open {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(P)>;
+        };
+
+        macro_toggle_sidebar: macro_toggle_sidebar {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(B)>;
+        };
+
+        macro_quick_fix: macro_quick_fix {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
                 = <&macro_tap &kp LC(DOT)>;
         };
 
-        macro_quick_fix_macos: macro_quick_fix_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(DOT)>;
-        };
-
-        // Split Editor
-        macro_split_editor_win: macro_split_editor_win {
+        macro_split_editor: macro_split_editor {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
                 = <&macro_tap &kp LC(BSLH)>;
         };
 
-        macro_split_editor_macos: macro_split_editor_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(BSLH)>;
-        };
-
-        // Add Cursor Below (multi-cursor)
-        macro_multi_cursor_down_win: macro_multi_cursor_down_win {
+        macro_multi_cursor_down: macro_multi_cursor_down {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
                 = <&macro_tap &kp LC(LA(DOWN))>;
         };
 
-        macro_multi_cursor_down_macos: macro_multi_cursor_down_macos {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LG(LA(DOWN))>;
-        };
-
-        // Toggle Zen Mode (chord: primary modifier+K, then Z)
-        macro_zen_mode_win: macro_zen_mode_win {
+        // Zen Mode: acorde Ctrl+K, luego Z
+        macro_zen_mode: macro_zen_mode {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
                 = <&macro_tap &kp LC(K) &kp Z>;
         };
 
-        macro_zen_mode_macos: macro_zen_mode_macos {
+#else /* MB9I_OS_MACOS */
+
+        /* --- Edición (macOS) --- */
+
+        macro_copy: macro_copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(C)>;
+        };
+
+        macro_paste: macro_paste {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(V)>;
+        };
+
+        macro_cut: macro_cut {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(X)>;
+        };
+
+        macro_select_all: macro_select_all {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(A)>;
+        };
+
+        macro_undo: macro_undo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(Z)>;
+        };
+
+        // En macOS rehacer es Cmd+Shift+Z, no una tecla aparte
+        macro_redo: macro_redo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LS(Z))>;
+        };
+
+        macro_duplicate: macro_duplicate {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(D)>;
+        };
+
+        macro_comment: macro_comment {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(FSLH)>;
+        };
+
+        /* --- Archivos (macOS) --- */
+
+        macro_save: macro_save {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(S)>;
+        };
+
+        macro_save_as: macro_save_as {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LS(S))>;
+        };
+
+        macro_new: macro_new {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(N)>;
+        };
+
+        macro_open: macro_open {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(O)>;
+        };
+
+        macro_print: macro_print {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(P)>;
+        };
+
+        /* --- Búsqueda (macOS) --- */
+
+        macro_find: macro_find {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(F)>;
+        };
+
+        macro_find_next: macro_find_next {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(G)>;
+        };
+
+        // Cmd+Opt+F: buscar y reemplazar
+        macro_replace: macro_replace {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LA(F))>;
+        };
+
+        /* --- Formato de texto (macOS) --- */
+
+        macro_bold: macro_bold {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(B)>;
+        };
+
+        macro_italic: macro_italic {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(I)>;
+        };
+
+        macro_underline: macro_underline {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(U)>;
+        };
+
+        /* --- Pestañas y zoom (macOS) --- */
+
+        macro_new_tab: macro_new_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(T)>;
+        };
+
+        macro_close_tab: macro_close_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(W)>;
+        };
+
+        macro_reopen_tab: macro_reopen_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LS(T))>;
+        };
+
+        macro_refresh: macro_refresh {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(R)>;
+        };
+
+        macro_zoom_in: macro_zoom_in {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(KP_PLUS)>;
+        };
+
+        macro_zoom_out: macro_zoom_out {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(KP_MINUS)>;
+        };
+
+        macro_zoom_reset: macro_zoom_reset {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(N0)>;
+        };
+
+        /* --- Sistema (macOS) --- */
+
+        macro_quit_app: macro_quit_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(Q)>;
+        };
+
+        macro_switch_app: macro_switch_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(TAB)>;
+        };
+
+        // Cmd+Espacio: Spotlight
+        macro_search: macro_search {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(SPACE)>;
+        };
+
+        // Cmd+Shift+4: captura de una selección
+        macro_screenshot: macro_screenshot {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LS(N4))>;
+        };
+
+        macro_lock_screen: macro_lock_screen {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LC(Q))>;
+        };
+
+        macro_minimize_window: macro_minimize_window {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(M)>;
+        };
+
+        macro_hide_app: macro_hide_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(H)>;
+        };
+
+        macro_new_window: macro_new_window {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(N)>;
+        };
+
+        macro_force_quit: macro_force_quit {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LA(ESC))>;
+        };
+
+        /* --- VS Code (macOS) --- */
+
+        macro_command_palette: macro_command_palette {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LS(P))>;
+        };
+
+        macro_quick_open: macro_quick_open {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(P)>;
+        };
+
+        macro_toggle_sidebar: macro_toggle_sidebar {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(B)>;
+        };
+
+        macro_quick_fix: macro_quick_fix {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(DOT)>;
+        };
+
+        macro_split_editor: macro_split_editor {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(BSLH)>;
+        };
+
+        macro_multi_cursor_down: macro_multi_cursor_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(LA(DOWN))>;
+        };
+
+        // Zen Mode: acorde Cmd+K, luego Z
+        macro_zen_mode: macro_zen_mode {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
                 = <&macro_tap &kp LG(K) &kp Z>;
         };
+
+#endif /* MB9I_OS_WIN */
+
     };
 };
